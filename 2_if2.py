@@ -15,12 +15,22 @@
 
 """
 
-def main():
-    """
-    Эта функция вызывается автоматически при запуске скрипта в консоли
-    В ней надо заменить pass на ваш код
-    """
-    pass
-    
-if __name__ == "__main__":
-    main()
+str1 = input('Введите строку 1: ')
+str2 = input('Введите строку 2: ')
+
+def main(str1, str2):
+    if isinstance(str1,str) and isinstance(str2,str):
+        if str1 == str2:
+          return ('1')
+        elif str1 != str2 and len(str1) > len(str2):
+          return ('2')
+        elif str1 != str2 and str2 == 'learn':
+          return ('3')
+        else:
+          return('Ситуация не описана в задании')
+    else:
+      return('0')
+
+
+
+print(main(str1,str2))
