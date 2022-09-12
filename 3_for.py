@@ -47,7 +47,7 @@ def main():
       total_phone_sold = sum (phonesales[i]['items_sold'])
       print ('Средняя продажа {phone} телефонов: ' + str(round(avg_phone_sold,2)))
       print ('Всего продано {phone} телефонов: ' + str(round(total_phone_sold)))
-    print ('Средняя продажа телефонов: ' + str(avg_phone_sold(phonesales)))
+    print ('Средняя продажа телефонов: ' + str(avg_phone_sold))
     
 if __name__ == "__main__":
     main()
