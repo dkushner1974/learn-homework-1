@@ -12,7 +12,8 @@
   бота отвечать, в каком созвездии сегодня находится планета.
 
 """
-import logging
+import logging, ephem, datetime
+
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
@@ -41,9 +42,24 @@ def talk_to_me(update, context):
     print(user_text)
     update.message.reply_text(text)
 
+def planet(update, context):
+    date = datetime.datetime.now()
+    planet_dict = [name for _0, _1, name in ephem._libastro.builtin_planets()]
+    text = update.message.text
+    print('Вызов /planet')
+    if len(text.split()) == 2:
+        user_planet = text.split()[-1].capitalize()
+        if user_planet in planet_dict:
+            cons = getattr(ephem, user_planet)(date)
+            planet = (('Планета {} сейчас в созвездии '.format(user_planet)) + str(ephem.constellation(cons)))  
+        else:
+            planet = 'Нет такой планеты в словаре'      
+    else:
+        planet = 'Это точно не планета'
+    update.message.reply_text(planet)
 
 def main():
-    mybot = Updater("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", request_kwargs=PROXY, use_context=True)
+    mybot = Updater("5714257774:AAGnJCYRUhEev7HrMBp208wjHWw-cOhymH0", request_kwargs=PROXY, use_context=True)
 
     dp = mybot.dispatcher
     dp.add_handler(CommandHandler("start", greet_user))
